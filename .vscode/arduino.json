@@ -1,0 +1,7 @@
+{
+    "sketch": "scale\\scale.ino",
+    "board": "arduino:avr:nano",
+    "port": "COM5",
+    "output": "../build",
+    "configuration": "cpu=atmega328old"
+}
