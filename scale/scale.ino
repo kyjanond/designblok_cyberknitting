@@ -1,3 +1,6 @@
+// The sensor will zero itself (tare) everytime it is switched on.
+// Adjust FORCE_LIMIT to change the sensitivity.
+// D7 pin is normally opened. D8 pin is normally closed. 
 #include "HX711.h"
 
 #define DOUT  2
