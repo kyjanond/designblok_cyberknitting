@@ -1,6 +1,7 @@
 // Adjust NUMPIXELS to change the number of pixels in the system. 
 // Adjust FADE_FREQ to change the fade duration (lower is slower).
 // D7 pin is normally opened. D8 pin is normally closed. 
+// library used: https://www.arduino.cc/reference/en/libraries/adafruit-mpr121/ , https://www.arduino.cc/reference/en/libraries/adafruit-neopixel/
 
 #include <Adafruit_NeoPixel.h>
 #include <SPI.h>
