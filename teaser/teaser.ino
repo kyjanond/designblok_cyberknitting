@@ -18,9 +18,9 @@
 
 //NEOPIXELS
 #define NEOPIXEL_PIN  6
-#define NUMPIXELS     52 //ADJUST THIS: nr of pixels in the system
+#define NUMPIXELS     154 //ADJUST THIS: nr of pixels in the system
 #define DELAYVAL      40
-#define FADE_FREQ     0.5f //ADJUST THIS: higher number is faster fade
+#define FADE_FREQ     0.2f //ADJUST THIS: higher number is faster fade
 const uint8_t LVLTOUCH = 255;
 const uint8_t LVLNOTOUCH = 0;
 const uint8_t STEP = (LVLTOUCH-LVLNOTOUCH)*(DELAYVAL/(1000.0f/FADE_FREQ));
@@ -133,7 +133,7 @@ void run_pixels(){
   {
     last_time = current_time;
     if (is_touching){
-      br_raw += STEP;
+      br_raw += STEP*4;
     }
     else{
       br_raw -= STEP;
@@ -147,7 +147,18 @@ void run_pixels(){
     }
     uint8_t act_br = br_raw;
     //pixels.clear();
-    pixels.fill(pixels.Color(act_br,0,(255-act_br)*0.2),0,NUMPIXELS);
+    uint8_t cl_r = act_br;
+    uint8_t cl_g = 2+(act_br / 3);
+    uint8_t cl_b = 4;
+    if (act_br<6){    
+      cl_r = 6;
+      cl_g = 4;
+      cl_b = 4;
+    }
+    
+    pixels.fill(pixels.Color(cl_r,cl_g,cl_b),0,NUMPIXELS);
+    //pixels.fill(pixels.Color(act_br,40,(255-act_br)*0.2),0,NUMPIXELS);
+
     pixels.show();
   }
 }
