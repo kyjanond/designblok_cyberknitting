@@ -29,6 +29,9 @@ Adafruit_NeoPixel pixels(NUMPIXELS, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
 //MPR121
 #define SIG_NO 7
 #define SIG_NC 8
+//more info https://learn.adafruit.com/adafruit-mpr121-12-key-capacitive-touch-sensor-breakout-tutorial/wiring#load-demo-805448
+#define TOUCH_TRSH 12U //uint_8 value; higher means less sensitive, i.e. it reads 1 when: filtered reading < baseline-TOUCH_TRSH
+#define RELEASE_TRSH 6U //uint_8 value; higher means less sensitive, i.e. it reads 0 when: filtered reading > baseline+RELEASE_TRSH
 Adafruit_MPR121 cap = Adafruit_MPR121();
 
 // Keeps track of the last pins touched
@@ -64,7 +67,7 @@ void setup() {
   
   // Default address is 0x5A, if tied to 3.3V its 0x5B
   // If tied to SDA its 0x5C and if SCL then 0x5D
-  if (!cap.begin(0x5A,&Wire,14U,6U)) {
+  if (!cap.begin(0x5A,&Wire,TOUCH_TRSH,RELEASE_TRSH)) {
     Serial.println("MPR121 not found, check wiring?");
     while (1);
   }
